@@ -3,6 +3,8 @@ import NavLink from './NavLink.vue';
 import { computed } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 
+const emit = defineEmits(['linkClicked']);
+
 const page = usePage();
 const username = computed(() => page.props.auth.user.username);
 </script>
@@ -12,7 +14,7 @@ const username = computed(() => page.props.auth.user.username);
         <p>اهلا , {{ username }}!</p>
     </div>
     
-    <nav>
+    <nav @click="emit('linkClicked')">
         <ul class="flex flex-col space-y-2 text-right">
             <li>
                 <NavLink href="/" :active="$page.component === 'Home'">

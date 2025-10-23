@@ -14,6 +14,7 @@ const username = computed(() => page.props.auth.user.username);
 <template>
     <Head>
         <meta type="description" content="Information about this app" head-key="description">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     </Head>
     
     <!-- Header -->
@@ -43,7 +44,7 @@ const username = computed(() => page.props.auth.user.username);
     </main>
 
     <!-- Footer -->
-    <footer class="fixed bottom-0 left-0 right-0 mr-[20%] bg-white border-t shadow-lg md:hidden">
+    <footer class="fixed bottom-0 left-0 right-0 bg-[#f5f5dc] shadow-lg md:hidden">
         <div class="max-w-3xl mx-auto px-6 py-3 flex justify-between items-center">
             <div class="flex items-center gap-3">
                 <Hamburger />
