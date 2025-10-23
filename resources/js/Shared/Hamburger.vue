@@ -38,7 +38,7 @@ function close() {
                     </div>
                     <!-- نعيد استخدام NavSidebar داخل الهامبرغر؛ نغلفه لتنسيق القائمة المنبثقة -->
                     <div class="text-gray-700">
-                        <NavSidebar />
+                        <NavSidebar @linkClicked="close" />
                     </div>
                 </div>
             </div>
