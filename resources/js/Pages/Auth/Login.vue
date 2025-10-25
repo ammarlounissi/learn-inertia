@@ -1,6 +1,6 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-
+import { onMounted } from 'vue'; // إضافة لـ onMounted
 
 defineOptions({
     layout: null
@@ -14,9 +14,27 @@ let form = useForm({
 let submit = () => {
     form.post('/login');
 }
-</script>
-<template>
 
+onMounted(() => {
+    // إضافة ودجيت Telegram ديناميكيًا
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://telegram.org/js/telegram-widget.js?22'; // الإصدار الحالي
+    script.setAttribute('data-telegram-login', 'Badis2025_bot'); // استبدل بـ bot username الخاص بك
+    script.setAttribute('data-size', 'large'); // حجم الزر: large, medium, small
+    script.setAttribute('data-auth-url', '/telegram/callback'); // URL الـ redirect في Laravel
+    script.setAttribute('data-request-access', 'write'); // للسماح بالوصول
+    // script.setAttribute('data-radius', '20'); // اختياري: لجعل الزر مدورًا
+    // script.setAttribute('data-userpic', 'false'); // اختياري: إخفاء صورة المستخدم
+
+    const container = document.getElementById('telegram-login');
+    if (container) {
+        container.appendChild(script);
+    }
+});
+</script>
+
+<template>
     <Head title="Log In" />
 
     <main class="grid place-items-center min-h-screen">
@@ -44,7 +62,7 @@ let submit = () => {
                     </div>
                 </div>
 
-                <div>
+                <div class="mb-6">
                     <button type="submit"
                         class="bg-blue-400 text-white cursor-pointer rounded py-2 px-4 hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-70"
                         :disabled="form.processing">
@@ -52,6 +70,12 @@ let submit = () => {
                     </button>
                 </div>
             </form>
+
+            <!-- إضافة ودجيت Telegram هنا -->
+            <div class="mb-6">
+                <h2 class="text-xl mb-4">Or Log In with Telegram</h2>
+                <div id="telegram-login"></div> <!-- Placeholder للودجيت -->
+            </div>
         </section>
     </main>
 </template>
