@@ -43,31 +43,27 @@ class LoginController extends Controller
     }
 
     // دالة جديدة لمعالجة تسجيل الدخول عبر Telegram
-    public function telegramCallback(TelegramLoginAuth $telegramLoginAuth, Request $request): RedirectResponse
-    {
-        try {
-            if (!$telegramData = $telegramLoginAuth->validate($request)) {
-                throw new \Exception('Invalid Telegram data');
-            }
+   public function telegramCallback(TelegramLoginAuth $telegramLoginAuth, Request $request): RedirectResponse
+{
+    if ($telegramData = $telegramLoginAuth->validate($request)) {
+        $user = User::where('telegram_id', $telegramData->getId())->first();
 
-            $user = User::firstOrCreate(
-                ['telegram_id' => $telegramData->getId()],
-                [
-                    'name' => trim($telegramData->getFirstName() . ' ' . ($telegramData->getLastName() ?? '')),
-                    'username' => $telegramData->getUsername() ?? Str::random(8),
-                    'password' => bcrypt(Str::random(16))
-                ]
-            );
-
-            Auth::login($user);
-            $request->session()->regenerate();
-
-            return redirect()->intended();
-
-        } catch (\Exception $e) {
-            return redirect()
-                ->route('login')
-                ->withErrors(['telegram' => 'فشل تسجيل الدخول عبر Telegram: ' . $e->getMessage()]);
+        if (!$user) {
+            $user = User::create([
+                'telegram_id' => $telegramData->getId(),
+                'name' => $telegramData->getFirstName() . ($telegramData->getLastName() ? ' ' . $telegramData->getLastName() : ''),
+                'username' => $telegramData->getUsername(),
+                'email' => null, // أضف هذا للتأكيد
+                'password' => bcrypt(Str::random(16)),
+            ]);
         }
+
+        Auth::login($user);
+        $request->session()->regenerate();
+
+        return redirect()->intended('/'); // أو Inertia::location('/') إذا استمرت مشكلة التوجيه
     }
+
+    return redirect()->route('login')->withErrors(['telegram' => 'فشل تسجيل الدخول عبر Telegram.']);
+}
 }
