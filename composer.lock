@@ -4,8 +4,64 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dad88447cbb2012be55bd5e94fabcbe2",
+    "content-hash": "fcc38f147d07273628d56d4df6aaf12a",
     "packages": [
+        {
+            "name": "azate/laravel-telegram-login-auth",
+            "version": "v2.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/azate/laravel-telegram-login-auth.git",
+                "reference": "9e5fc9b4ce8b4b83bd5b19d5455cf515cc8b855f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/azate/laravel-telegram-login-auth/zipball/9e5fc9b4ce8b4b83bd5b19d5455cf515cc8b855f",
+                "reference": "9e5fc9b4ce8b4b83bd5b19d5455cf515cc8b855f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "^9 || ^10 || ^11 || ^12",
+                "illuminate/contracts": "^9 || ^10 || ^11 || ^12",
+                "illuminate/http": "^9 || ^10 || ^11 || ^12",
+                "illuminate/support": "^9 || ^10 || ^11 || ^12",
+                "php": "^8"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Azate\\LaravelTelegramLoginAuth\\Providers\\LaravelServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Azate\\LaravelTelegramLoginAuth\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Artem Didyk",
+                    "email": "c5c77b6+1467d308@gmail.com"
+                }
+            ],
+            "description": "Laravel Telegram Login Auth",
+            "keywords": [
+                "auth",
+                "laravel",
+                "telegram"
+            ],
+            "support": {
+                "issues": "https://github.com/azate/laravel-telegram-login-auth/issues",
+                "source": "https://github.com/azate/laravel-telegram-login-auth/tree/v2.5.0"
+            },
+            "time": "2025-04-01T23:27:28+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.13.1",
