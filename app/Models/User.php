@@ -22,8 +22,9 @@ class User extends Authenticatable
         'email',
         'password',
         'remember_token',
-        'telegram_id'
-    ];
+        'telegram_id',
+        'username', // أضف إذا لم يكن موجودًا
+];
 
     /**
      * The attributes that should be hidden for serialization.
