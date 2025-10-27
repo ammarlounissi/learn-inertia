@@ -1,6 +1,5 @@
 <script setup>
-import { useForm } from '@inertiajs/vue3';
-import { onMounted } from 'vue'; // إضافة لـ onMounted
+import { onMounted } from 'vue'; // تم الاحتفاظ بها لتهيئة الودجيت
 
 defineProps({
     telegramCallbackUrl: String,
@@ -10,18 +9,20 @@ defineOptions({
     layout: null
 });
 
+// تم حذف:
+// import { useForm } from '@inertiajs/vue3';
+// let form = useForm({ email: '', password: '' });
+// let submit = () => { form.post('/login'); }
 
 onMounted(() => {
-    // إضافة ودجيت Telegram ديناميكيًا
+    // تهيئة وودجيت Telegram
     const script = document.createElement('script');
     script.async = true;
-    script.src = 'https://telegram.org/js/telegram-widget.js?22'; // الإصدار الحالي
-    script.setAttribute('data-telegram-login', 'Badis2025_bot'); // استبدل بـ bot username الخاص بك
-    script.setAttribute('data-size', 'large'); // حجم الزر: large, medium, small
-    script.setAttribute('data-auth-url', telegramCallbackUrl); // استخدام الـ URL من الـ props
-    script.setAttribute('data-request-access', 'write'); // للسماح بالوصول
-    // script.setAttribute('data-radius', '20'); // اختياري: لجعل الزر مدورًا
-    // script.setAttribute('data-userpic', 'false'); // اختياري: إخفاء صورة المستخدم
+    script.src = 'https://telegram.org/js/telegram-widget.js?22';
+    script.setAttribute('data-telegram-login', 'Badis2025_bot'); // اسم البوت الخاص بك
+    script.setAttribute('data-size', 'large');
+    script.setAttribute('data-auth-url', telegramCallbackUrl);
+    script.setAttribute('data-request-access', 'write');
 
     const container = document.getElementById('telegram-login');
     if (container) {
@@ -31,12 +32,24 @@ onMounted(() => {
 </script>
 
 <template>
-    <main class="grid place-items-center min-h-screen">
-        <section class="bg-white p-8 rounded-xl max-w-md mx-auto border w-full text-center">
-            <div class="mb-6">
-                <h2 class="text-xl mb-4"> التسجيل عبر تيليجرام</h2>
+    <Head title="Log In" />
+
+    <main class="grid place-items-center min-h-screen bg-gray-100">
+        <section class="bg-white p-10 rounded-2xl shadow-xl max-w-sm mx-auto border w-full">
+
+            <!-- عنوان موجه لتسجيل الدخول عبر تيليجرام -->
+            <h1 class="text-3xl font-extrabold text-gray-800 mb-8 text-center">
+                Log In
+            </h1>
+            <p class="text-gray-600 mb-8 text-center">
+                من فضلك قم بتسجيل الدخول باستخدام حساب تيليجرام الخاص بك
+            </p>
+
+            <!-- قسم ودجيت Telegram -->
+            <div class="flex justify-center">
                 <div id="telegram-login"></div> <!-- Placeholder للودجيت -->
             </div>
+
         </section>
     </main>
 </template>
