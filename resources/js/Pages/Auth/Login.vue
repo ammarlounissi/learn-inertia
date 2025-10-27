@@ -2,6 +2,10 @@
 import { useForm } from '@inertiajs/vue3';
 import { onMounted } from 'vue'; // إضافة لـ onMounted
 
+defineProps({
+    telegramCallbackUrl: String,
+});
+
 defineOptions({
     layout: null
 });
@@ -22,7 +26,7 @@ onMounted(() => {
     script.src = 'https://telegram.org/js/telegram-widget.js?22'; // الإصدار الحالي
     script.setAttribute('data-telegram-login', 'Badis2025_bot'); // استبدل بـ bot username الخاص بك
     script.setAttribute('data-size', 'large'); // حجم الزر: large, medium, small
-    script.setAttribute('data-auth-url', 'https://m.ikhlasdz.com/telegram/callback'); // URL الـ redirect في Laravel
+    script.setAttribute('data-auth-url', telegramCallbackUrl); // استخدام الـ URL من الـ props
     script.setAttribute('data-request-access', 'write'); // للسماح بالوصول
     // script.setAttribute('data-radius', '20'); // اختياري: لجعل الزر مدورًا
     // script.setAttribute('data-userpic', 'false'); // اختياري: إخفاء صورة المستخدم
